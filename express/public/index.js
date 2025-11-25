@@ -19973,7 +19973,7 @@ const Map = (props)=>{
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Popup), {
                                     eventHandlers: {
                                         add: ()=>{
-                                            setBikewayId(b.bikewayId); // ⭐ 只要 popup 打开就更新 id
+                                            setBikewayId(b.bikewayId);
                                         }
                                     },
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {

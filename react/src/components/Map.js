@@ -184,7 +184,7 @@ export const Map = props => {
                             <Popup
                                 eventHandlers={{
                                     add: () => {
-                                        setBikewayId(b.bikewayId);  // ⭐ 只要 popup 打开就更新 id
+                                        setBikewayId(b.bikewayId);
                                     }
                                 }}
                             >
