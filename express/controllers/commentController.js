@@ -37,9 +37,9 @@ const getOneComment = async (req, res) => {
 const commentsByBikewayId = async (req, res) => {
     try {
         const result = await commentModel.commentsByBikewayId(req.params.bikewayId);
-        // if (!result) {
-        //     res.status(404).json("Not found")
-        // }
+        if (result.length===0) {
+            res.status(404).json("Not found")
+        }
 
         res.json({
             message: 'Fetch comments successfully',
