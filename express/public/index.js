@@ -33496,7 +33496,8 @@ const Comment = (props)=>{
             const data = await res.json();
             console.log(data);
             setLoading(false);
-            getAllComments();
+            // getAllComments();
+            setComments((prevComments)=>prevComments.filter((c)=>c.id !== id));
             props.reduceCommentCount(props.bikewayId);
         } catch (error) {
             setLoading(false);
@@ -33669,7 +33670,7 @@ const Comment = (props)=>{
                                     columnNumber: 29
                                 }, undefined)
                             ]
-                        }, comment.index, true, {
+                        }, comment.id, true, {
                             fileName: "src/components/Comment.js",
                             lineNumber: 131,
                             columnNumber: 25

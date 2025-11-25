@@ -85,10 +85,10 @@ export const Comment = props => {
             const data = await res.json();
             console.log(data);
             setLoading(false);
-            getAllComments();
+            // getAllComments();
+            setComments(prevComments => prevComments.filter(c => c.id !== id));
 
             props.reduceCommentCount(props.bikewayId);
-            
 
         } catch (error) {
             setLoading(false)
@@ -129,7 +129,7 @@ export const Comment = props => {
                             }}>Update</button>
                         </form> :
                         <div
-                            key={comment.index}
+                            key={comment.id}
                             style={{ padding: '.7rem', backgroundColor: 'white', borderRadius: '10px', height: '200px', width: '150px', flexShrink: 0 }}
                         >
                             <p
