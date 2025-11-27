@@ -188,14 +188,16 @@ export const Map = props => {
                                     }
                                 }}
                             >
-                                <div style={{ display: "flex", flexDirection: 'column', gap: '.5rem' }}>
-                                    <button
-                                        style={{ backgroundColor: `${checkLikedStatus(b.bikewayId) ? 'pink' : '#d2d2d2ff'}`, fontSize: '1.2rem' }}
+                                <div style={{ display: "flex", flexDirection: 'column', gap: '.5rem'}}>
+                                    <div
+                                    style={{ display: "flex", justifyContent:'center'}}
+                                    ><span
+                                    style={{ fontSize: '1.5rem', textAlign:'center', cursor:'pointer' }}
                                         onClick={async () => {
                                             setLiked(!liked);
                                             await changeLikedStatus(b.bikewayId)
                                         }}
-                                    >{checkLikedStatus(b.bikewayId) ? '❤️' : '🩶'}</button>
+                                    >{checkLikedStatus(b.bikewayId) ? '❤️' : '🩶'}</span></div>
                                     <InfoRow
                                         title='Name'
                                         content={b.bikeway_name}

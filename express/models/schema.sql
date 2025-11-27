@@ -40,7 +40,7 @@ CREATE TABLE
         id INTEGER,
         bikewayId INTEGER,
         name TEXT CONSTRAINT "Name must have at least one letter" CHECK (LENGTH (name) > 0) NOT NULL, --I use CHECK and LEGTH condition to ensure name is at least on letter, and it's type should be text
-        year INTEGER CONSTRAINT "Year must greater or equals 0" CHECK (year > 0),
+        year INTEGER CONSTRAINT "Year must greater than 0" CHECK (year > 0),
         -- Year should be a number, so I use INTEGER as its value type, and use CHECK condition to ensure it is not negetive
         status TEXT CONSTRAINT "Status must have at least one letter" CHECK (LENGTH (status) > 0) NOT NULL,
         comment_count INTEGER DEFAULT 0 CONSTRAINT "Comment must greater or equals 0" CHECK (comment_count >= 0),
@@ -49,7 +49,7 @@ CREATE TABLE
         -- SpeedLimit is also a number
         surface_type_id INTEGER NOT NULL, --Foreign key can not be null
         PRIMARY KEY (bikewayId),
-        FOREIGN KEY (surface_type_id) REFERENCES surface_type (id) ON DELETE CASCADE
+        FOREIGN KEY (surface_type_id) REFERENCES surface_type (id)
     );
 
 ----------------------------------------------------------------------------------------------

@@ -98,12 +98,12 @@ export const Comment = props => {
 
 
 
-    return (< div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, borderRadius: '10px', zIndex: 1100, backgroundColor: '#2d9bdb77' }}>
+    return (< div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, borderRadius: '12px', zIndex: 1100, backgroundColor: '#2d9bdb77', fontFamily:'sans-serif'}}>
         <button
-            style={{ position: 'absolute', top: 0, left: 0 }}
+            style={{ position: 'absolute', top: 0, right: 0, border:'none', fontSize:'1.2rem'}}
             onClick={props.onClose}
 
-        >Close</button>
+        >X</button>
         <div style={{ overflowX: 'auto', display: 'flex', flexDirection: 'row', gap: '1rem', padding: '2rem', }}>
             {comments && comments.map((comment, index) => (
                 <>
@@ -111,9 +111,9 @@ export const Comment = props => {
                     {editMode && openIndex == index ?
                         <form
                             key={comment.id}
-                            style={{ padding: '.7rem', backgroundColor: 'white', borderRadius: '10px', height: '200px', width: '150px', flexShrink: 0 }}>
+                            style={{display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', backgroundColor: '#ffffff5e', borderRadius: '10px', height: '200px', width: '150px', flexShrink: 0, backdropFilter:'blur(10px)'}}>
                             {!loading && <textarea
-                                style={{ minHeight: '150px', width: '144px' }}
+                                style={{ minHeight: '150px', width: '133px', borderRadius: '10px',padding:'.5rem',backgroundColor:'#ffffff51',boxShadow:'inset 0 0 2px 0' }}
                                 defaultValue={comment.content}
                                 onChange={(e) => setNewComment({
                                     commentId: comment.id,
@@ -126,14 +126,16 @@ export const Comment = props => {
                             <button onClick={(e) => {
                                 e.preventDefault();
                                 updateComment();
-                            }}>Update</button>
+                            }}
+                            style={{borderRadius: '10px', backgroundColor:'#4972ecff', border:'none', padding:'.3rem', color:'white'}}
+                            >Update</button>
                         </form> :
                         <div
                             key={comment.id}
-                            style={{ padding: '.7rem', backgroundColor: 'white', borderRadius: '10px', height: '200px', width: '150px', flexShrink: 0 }}
+                            style={{display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', backgroundColor: '#ffffff5e', borderRadius: '10px', height: '200px', width: '150px', flexShrink: 0 , backdropFilter:'blur(10px)'}}
                         >
                             <p
-                                style={{ padding: '1rem', backgroundColor: '#efefefff', borderRadius: '10px', height: '110px', overflowY: 'auto', margin: 0 }}>{comment.content}</p>
+                                style={{ padding: '.5rem', backgroundColor: '#ffffff8f', borderRadius: '10px', height: '110px', overflowY: 'auto', margin: 0}}>{comment.content}</p>
                             <p style={{ fontSize: '.8rem' }}>{new Date(comment.date).toLocaleString('en-US', {
                                 year: 'numeric',
                                 month: 'short',
@@ -142,16 +144,16 @@ export const Comment = props => {
                                 minute: '2-digit'
                             })}
                             </p>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '.5rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '.5rem'}}>
                                 <button
-                                    style={{ width: '100%' }}
+                                    style={{ width: '100%', borderRadius: '10px', backgroundColor:'#4972ecff', border:'none', padding:'.3rem', color:'white' }}
                                     onClick={() => {
                                         setEditMode(true);
                                         setOpenIndex(index);
                                     }}
                                 >Edit</button>
                                 <button
-                                    style={{ width: '100%' }}
+                                    style={{ width: '100%', borderRadius: '10px', backgroundColor:'#de4343ff', border:'none', padding:'.3rem', color:'white', borderRadius: '10px', border:'none', padding:'.3rem'}}
                                     onClick={(e) => {
                                         e.preventDefault();
                                         deleteComment(comment.id);

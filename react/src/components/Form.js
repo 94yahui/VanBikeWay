@@ -39,28 +39,19 @@ export const Form = props => {
         }
     }
 
-    useEffect(() => {
-        if (!props.isOpen) {
-            setComment('');
-            setErrorMessage('');
-            setLoading(false);
-        }
-
-    }, [props.isOpen])
-
 
 
 
     return (
-        <form style={{ marginTop: '1rem', display: "flex", flexDirection: 'column', gap: '.5rem', transition: 'all .35s ease' }}>
+        <form style={{ marginTop: '1rem', display: "flex", flexDirection: 'column', gap: '.5rem', transition: 'all .35s ease'}}>
             <h2 style={{ textAlign: 'center' }}>Comment</h2>
             {loading ? <p>Uploading your comment...</p> : <textarea
-                style={{ minHeight: '100px' }}
-                onChange={e => setComment(e.target.value)}
+                style={{ minHeight: '100px', width:'90%',borderRadius:'10px',alignSelf:'center', padding:'.5rem', borderColor:'#4972ecff'}}
+                onChange={e => {setComment(e.target.value);setErrorMessage('')}}
             ></textarea>}
-            {errorMessage && <p style={{ color: `${errorMessage.includes('success') ? '#34e57bff' : 'red'}` }}>{errorMessage}</p>}
+            {errorMessage && <p style={{ color: `${errorMessage.includes('success') ? '#34e57bff' : 'red'}`, fontWeight:'semi-bold', textAlign:'center'}}>{errorMessage}</p>}
             <button
-                style={{ backgroundColor: '#2D9CDB', borderRadius: '10px', color: 'white' }}
+                style={{ backgroundColor: '#4972ecff', borderRadius: '10px', color: 'white', padding:'.3rem', border:'none'}}
                 onClick={postComment}
             >Submit</button>
         </form>
