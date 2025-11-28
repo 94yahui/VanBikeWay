@@ -46,7 +46,7 @@ export const Form = props => {
         <form style={{ marginTop: '1rem', display: "flex", flexDirection: 'column', gap: '.5rem', transition: 'all .35s ease'}}>
             <h2 style={{ textAlign: 'center' }}>Comment</h2>
             {loading ? <p>Uploading your comment...</p> : <textarea
-                style={{ minHeight: '100px', width:'90%',borderRadius:'10px',alignSelf:'center', padding:'.5rem', borderColor:'#4972ecff'}}
+                style={{ minHeight: '100px', width:'90%',borderRadius:'10px',alignSelf:'center', padding:'.5rem', borderColor:'lightblue',resize:'none'}}
                 onChange={e => {setComment(e.target.value);setErrorMessage('')}}
             ></textarea>}
             {errorMessage && <p style={{ color: `${errorMessage.includes('success') ? '#34e57bff' : 'red'}`, fontWeight:'semi-bold', textAlign:'center'}}>{errorMessage}</p>}

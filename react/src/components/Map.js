@@ -10,7 +10,7 @@ import { Comment } from "./Comment.js";
 export const Map = props => {
 
     const mapStyle = {
-        height: "98.5vh",
+        height: "500px",
         borderRadius: "20px",
         position: 'relative'
     }
@@ -39,12 +39,12 @@ export const Map = props => {
         fontSize: '1rem',
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
         borderColor: 'black',
-        width:'30px',
-        height:'30px',
-        display:"flex",
-        justifyContent:'center',
-        alignItems:'center',
-        cursor:'pointer'
+        width: '30px',
+        height: '30px',
+        display: "flex",
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer'
     }
 
     const [bikeways, setBikeways] = useState([]);
@@ -57,6 +57,15 @@ export const Map = props => {
     const [liked, setLiked] = useState(false);
     const [likedBikeways, setLikedBikeways] = useState([]);
     const [chooseLiked, setChooseliked] = useState(false);
+    const [status, setStatus] = useState('');
+    const [speedLimit, setSpeedLimit] = useState({
+        minSpeed: 0,
+        maxSpeed: 0
+    });
+    const [year, setYear] = useState({
+        minYear: 0,
+        maxYear: 9999
+    });
 
 
     //fetch all the bikeways----------------------------------
@@ -141,20 +150,166 @@ export const Map = props => {
             return checkLikedStatus(b.bikewayId) && b.bikeway_name.toLowerCase().includes(searchValue.trim().toLowerCase())
         }
 
+
+
         return b.bikeway_name.toLowerCase().includes(searchValue.trim().toLowerCase())
     }
     )
 
+    const bikewayStatus = [...new Set(filteredBikeways.map(b => b.status))];
+
+    const filteredData = filteredBikeways.filter(b => {
+        const statusMatch = status ? b.status === status : true;
+
+        const speedMatch = (!speedLimit.minSpeed || b.speedLimit >= speedLimit.minSpeed) &&
+            (!speedLimit.maxSpeed || b.speedLimit <= speedLimit.maxSpeed);
+
+        const yearMatch = (!year.minYear || b.year >= year.minYear) &&
+            (!year.maxYear || b.year <= year.maxYear);
+
+        return statusMatch && speedMatch && yearMatch;
+
+    })
 
 
 
     return (
         <div style={{ position: 'relative' }}>
+            <div style={{
+                textAlign:'center',
+                padding: '1.5rem',
+                background:'linear-gradient(45deg,lightgreen, lightblue)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '15px',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                marginBottom:'1rem',
+                fontFamily:'sans-serif'
+            }}><h1>Vancouver Bikeways</h1></div>
+            <div style={{
+                display: 'flex',
+                flexWrap:'wrap',
+                gap: '1rem',
+                padding: '1.5rem',
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '15px',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                marginBottom:'1rem',
+                fontFamily:'sans-serif'
+            }}>
+                {/* Status Card */}
+                <div style={{
+                    flex: 1,
+                    padding: '1rem',
+                    backgroundColor: '#fff',
+                    borderRadius: '10px',
+                    border: '1px solid #e0e0e0'
+                }}>
+                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                        <i class="fa-solid fa-location-crosshairs"></i> Status
+                    </label>
+                    <select
+                        onChange={(e) => setStatus(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '0.6rem',
+                            borderRadius: '8px',
+                            border: '1px solid #ccc',
+                            fontSize: '0.95rem'
+                        }}
+                    >
+                        <option value="">All Status</option>
+                        {bikewayStatus.map((s, index) =>
+                            <option key={index} value={s}>{s}</option>
+                        )}
+                    </select>
+                </div>
+
+                {/* Speed Limit Card */}
+                <div style={{
+                    flex: 1,
+                    padding: '1rem',
+                    backgroundColor: '#fff',
+                    borderRadius: '10px',
+                    border: '1px solid #e0e0e0'
+                }}>
+                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                        <i class="fa-solid fa-bicycle"></i> Speed Limit (km/h)
+                    </label>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <input
+                            type="number"
+                            placeholder="Min"
+                            onChange={(e) => setSpeedLimit({ ...speedLimit, minSpeed: Number(e.target.value) })}
+                            style={{
+                                flex: 1,
+                                padding: '0.6rem',
+                                borderRadius: '8px',
+                                border: '1px solid #ccc',
+                                fontSize: '0.95rem'
+                            }}
+                        />
+                        <span style={{ color: '#999' }}>~</span>
+                        <input
+                            type="number"
+                            placeholder="Max"
+                            onChange={(e) => setSpeedLimit({ ...speedLimit, maxSpeed: Number(e.target.value) })}
+                            style={{
+                                flex: 1,
+                                padding: '0.6rem',
+                                borderRadius: '8px',
+                                border: '1px solid #ccc',
+                                fontSize: '0.95rem'
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* Year Card */}
+                <div style={{
+                    flex: 1,
+                    padding: '1rem',
+                    backgroundColor: '#fff',
+                    borderRadius: '10px',
+                    border: '1px solid #e0e0e0'
+                }}>
+                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
+                        <i class="fa-regular fa-calendar"></i> Year
+                    </label>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <input
+                            type="number"
+                            placeholder="From"
+                            onChange={(e) => setYear({ ...year, minYear: Number(e.target.value) })}
+                            style={{
+                                flex: 1,
+                                padding: '0.6rem',
+                                borderRadius: '8px',
+                                border: '1px solid #ccc',
+                                fontSize: '0.95rem'
+                            }}
+                        />
+                        <span style={{ color: '#999' }}>~</span>
+                        <input
+                            type="number"
+                            placeholder="To"
+                            onChange={(e) => setYear({ ...year, maxYear: Number(e.target.value) })}
+                            style={{
+                                flex: 1,
+                                padding: '0.6rem',
+                                borderRadius: '8px',
+                                border: '1px solid #ccc',
+                                fontSize: '0.95rem'
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
             <MapContainer style={mapStyle} zoom={13} center={[49.2827, -123.1207]}>
-                <div style={{ position: 'absolute', top: '2rem', left: '5rem', zIndex: 1200, padding: '.5rem', backgroundColor: '#ffffff93', borderRadius: '50px', display: 'flex', flexDirection: 'row', gap: '1rem', backdropFilter: 'blur(10px)', justifyContent: 'space-around', alignItems: 'center' }}>
+                <div style={{ position: 'absolute', top: '1rem', left: '5rem', zIndex: 1200, padding: '.5rem', backgroundColor: '#ffffff93', borderRadius: '50px', display: 'flex', flexDirection: 'row', gap: '1rem', backdropFilter: 'blur(10px)', justifyContent: 'space-around', alignItems: 'center' }}>
                     <div style={{ position: 'relative' }}>
                         <input
-                            style={{ borderRadius: '30px', border: 'none', padding: '1rem', backgroundColor:'#ffffffff'}}
+                            style={{ borderRadius: '30px', border: 'none', padding: '1rem', backgroundColor: '#ffffffff' }}
                             onChange={(e) => setSearchValue(e.target.value)}
                             value={searchValue}
                         ></input>
@@ -165,18 +320,15 @@ export const Map = props => {
                             <i class="fa-solid fa-x"></i>
                         </div>}
                     </div>
-                    <div style={{fontSize:'1.1rem', color:'#00000077', cursor:'pointer'}}>
-                        <i class="fa-solid fa-filter"></i>
-                    </div>
                     <span
-                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: 'center', borderRadius: '30px', height: '40px', width: '40px', backgroundColor: '#d0d0d0ab', cursor: 'pointer', fontSize: '1.2rem', color:'red'}}
+                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: 'center', borderRadius: '30px', height: '40px', width: '40px', backgroundColor: '#d0d0d0ab', cursor: 'pointer', fontSize: '1.2rem', color: 'red' }}
                         onClick={() => setChooseliked(!chooseLiked)}
                     ><i class="fa-solid fa-heart"></i></span>
                 </div>
                 <button
                     style={buttonStyle}
                     onClick={() => setDarkMode(!darkMode)}>
-                    {darkMode ? <i class="fa-solid fa-sun" style={{color:'white'}}></i> : <i class="fa-solid fa-moon"></i>}
+                    {darkMode ? <i class="fa-solid fa-sun" style={{ color: 'white' }}></i> : <i class="fa-solid fa-moon"></i>}
                 </button>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -197,7 +349,7 @@ export const Map = props => {
                         });
                     }}
                 >
-                    {filteredBikeways.map((b, index) => (
+                    {filteredData.map((b, index) => (
                         <Marker position={[b.lat, b.lon]} key={index}>
                             <Popup
                                 eventHandlers={{
@@ -215,7 +367,7 @@ export const Map = props => {
                                             setLiked(!liked);
                                             await changeLikedStatus(b.bikewayId)
                                         }}
-                                    >{checkLikedStatus(b.bikewayId) ? <i class="fa-solid fa-heart" style={{color:'red'}}></i>: <i class="fa-regular fa-heart"></i>}</div></div>
+                                    >{checkLikedStatus(b.bikewayId) ? <i class="fa-solid fa-heart" style={{ color: 'red' }}></i> : <i class="fa-regular fa-heart"></i>}</div></div>
                                     <InfoRow
                                         title='Name'
                                         content={b.bikeway_name}

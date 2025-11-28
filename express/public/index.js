@@ -17458,7 +17458,7 @@ var _s = $RefreshSig$();
 const Map = (props)=>{
     _s();
     const mapStyle = {
-        height: "98.5vh",
+        height: "500px",
         borderRadius: "20px",
         position: 'relative'
     };
@@ -17502,6 +17502,15 @@ const Map = (props)=>{
     const [liked, setLiked] = (0, _react.useState)(false);
     const [likedBikeways, setLikedBikeways] = (0, _react.useState)([]);
     const [chooseLiked, setChooseliked] = (0, _react.useState)(false);
+    const [status, setStatus] = (0, _react.useState)('');
+    const [speedLimit, setSpeedLimit] = (0, _react.useState)({
+        minSpeed: 0,
+        maxSpeed: 0
+    });
+    const [year, setYear] = (0, _react.useState)({
+        minYear: 0,
+        maxYear: 9999
+    });
     //fetch all the bikeways----------------------------------
     async function getAllBikeways() {
         try {
@@ -17562,11 +17571,328 @@ const Map = (props)=>{
         if (chooseLiked) return checkLikedStatus(b.bikewayId) && b.bikeway_name.toLowerCase().includes(searchValue.trim().toLowerCase());
         return b.bikeway_name.toLowerCase().includes(searchValue.trim().toLowerCase());
     });
+    const bikewayStatus = [
+        ...new Set(filteredBikeways.map((b)=>b.status))
+    ];
+    const filteredData = filteredBikeways.filter((b)=>{
+        const statusMatch = status ? b.status === status : true;
+        const speedMatch = (!speedLimit.minSpeed || b.speedLimit >= speedLimit.minSpeed) && (!speedLimit.maxSpeed || b.speedLimit <= speedLimit.maxSpeed);
+        const yearMatch = (!year.minYear || b.year >= year.minYear) && (!year.maxYear || b.year <= year.maxYear);
+        return statusMatch && speedMatch && yearMatch;
+    });
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         style: {
             position: 'relative'
         },
         children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                style: {
+                    textAlign: 'center',
+                    padding: '1.5rem',
+                    background: 'linear-gradient(45deg,lightgreen, lightblue)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '15px',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    marginBottom: '1rem',
+                    fontFamily: 'sans-serif'
+                },
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                    children: "Vancouver Bikeways"
+                }, void 0, false, {
+                    fileName: "src/components/Map.js",
+                    lineNumber: 187,
+                    columnNumber: 16
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/Map.js",
+                lineNumber: 178,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                style: {
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '1rem',
+                    padding: '1.5rem',
+                    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '15px',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    marginBottom: '1rem',
+                    fontFamily: 'sans-serif'
+                },
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        style: {
+                            flex: 1,
+                            padding: '1rem',
+                            backgroundColor: '#fff',
+                            borderRadius: '10px',
+                            border: '1px solid #e0e0e0'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                style: {
+                                    display: 'block',
+                                    fontWeight: '600',
+                                    marginBottom: '0.5rem',
+                                    color: '#333'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
+                                        class: "fa-solid fa-location-crosshairs"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 209,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    " Status"
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Map.js",
+                                lineNumber: 208,
+                                columnNumber: 21
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                onChange: (e)=>setStatus(e.target.value),
+                                style: {
+                                    width: '100%',
+                                    padding: '0.6rem',
+                                    borderRadius: '8px',
+                                    border: '1px solid #ccc',
+                                    fontSize: '0.95rem'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "",
+                                        children: "All Status"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 221,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    bikewayStatus.map((s, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                            value: s,
+                                            children: s
+                                        }, index, false, {
+                                            fileName: "src/components/Map.js",
+                                            lineNumber: 223,
+                                            columnNumber: 29
+                                        }, undefined))
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Map.js",
+                                lineNumber: 211,
+                                columnNumber: 21
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Map.js",
+                        lineNumber: 201,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        style: {
+                            flex: 1,
+                            padding: '1rem',
+                            backgroundColor: '#fff',
+                            borderRadius: '10px',
+                            border: '1px solid #e0e0e0'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                style: {
+                                    display: 'block',
+                                    fontWeight: '600',
+                                    marginBottom: '0.5rem',
+                                    color: '#333'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
+                                        class: "fa-solid fa-bicycle"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 237,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    " Speed Limit (km/h)"
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Map.js",
+                                lineNumber: 236,
+                                columnNumber: 21
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                style: {
+                                    display: 'flex',
+                                    gap: '0.5rem',
+                                    alignItems: 'center'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "number",
+                                        placeholder: "Min",
+                                        onChange: (e)=>setSpeedLimit({
+                                                ...speedLimit,
+                                                minSpeed: Number(e.target.value)
+                                            }),
+                                        style: {
+                                            flex: 1,
+                                            padding: '0.6rem',
+                                            borderRadius: '8px',
+                                            border: '1px solid #ccc',
+                                            fontSize: '0.95rem'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 240,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        style: {
+                                            color: '#999'
+                                        },
+                                        children: "~"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 252,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "number",
+                                        placeholder: "Max",
+                                        onChange: (e)=>setSpeedLimit({
+                                                ...speedLimit,
+                                                maxSpeed: Number(e.target.value)
+                                            }),
+                                        style: {
+                                            flex: 1,
+                                            padding: '0.6rem',
+                                            borderRadius: '8px',
+                                            border: '1px solid #ccc',
+                                            fontSize: '0.95rem'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 253,
+                                        columnNumber: 25
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Map.js",
+                                lineNumber: 239,
+                                columnNumber: 21
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Map.js",
+                        lineNumber: 229,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        style: {
+                            flex: 1,
+                            padding: '1rem',
+                            backgroundColor: '#fff',
+                            borderRadius: '10px',
+                            border: '1px solid #e0e0e0'
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                style: {
+                                    display: 'block',
+                                    fontWeight: '600',
+                                    marginBottom: '0.5rem',
+                                    color: '#333'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
+                                        class: "fa-regular fa-calendar"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 277,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    " Year"
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Map.js",
+                                lineNumber: 276,
+                                columnNumber: 21
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                style: {
+                                    display: 'flex',
+                                    gap: '0.5rem',
+                                    alignItems: 'center'
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "number",
+                                        placeholder: "From",
+                                        onChange: (e)=>setYear({
+                                                ...year,
+                                                minYear: Number(e.target.value)
+                                            }),
+                                        style: {
+                                            flex: 1,
+                                            padding: '0.6rem',
+                                            borderRadius: '8px',
+                                            border: '1px solid #ccc',
+                                            fontSize: '0.95rem'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 280,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        style: {
+                                            color: '#999'
+                                        },
+                                        children: "~"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 292,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "number",
+                                        placeholder: "To",
+                                        onChange: (e)=>setYear({
+                                                ...year,
+                                                maxYear: Number(e.target.value)
+                                            }),
+                                        style: {
+                                            flex: 1,
+                                            padding: '0.6rem',
+                                            borderRadius: '8px',
+                                            border: '1px solid #ccc',
+                                            fontSize: '0.95rem'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "src/components/Map.js",
+                                        lineNumber: 293,
+                                        columnNumber: 25
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Map.js",
+                                lineNumber: 279,
+                                columnNumber: 21
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Map.js",
+                        lineNumber: 269,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Map.js",
+                lineNumber: 188,
+                columnNumber: 13
+            }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.MapContainer), {
                 style: mapStyle,
                 zoom: 13,
@@ -17578,7 +17904,7 @@ const Map = (props)=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         style: {
                             position: 'absolute',
-                            top: '2rem',
+                            top: '1rem',
                             left: '5rem',
                             zIndex: 1200,
                             padding: '.5rem',
@@ -17608,7 +17934,7 @@ const Map = (props)=>{
                                         value: searchValue
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 156,
+                                        lineNumber: 311,
                                         columnNumber: 25
                                     }, undefined),
                                     searchValue && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17623,36 +17949,18 @@ const Map = (props)=>{
                                             class: "fa-solid fa-x"
                                         }, void 0, false, {
                                             fileName: "src/components/Map.js",
-                                            lineNumber: 165,
+                                            lineNumber: 320,
                                             columnNumber: 29
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 161,
+                                        lineNumber: 316,
                                         columnNumber: 41
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 155,
-                                columnNumber: 21
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                style: {
-                                    fontSize: '1.1rem',
-                                    color: '#00000077',
-                                    cursor: 'pointer'
-                                },
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
-                                    class: "fa-solid fa-filter"
-                                }, void 0, false, {
-                                    fileName: "src/components/Map.js",
-                                    lineNumber: 169,
-                                    columnNumber: 25
-                                }, undefined)
-                            }, void 0, false, {
-                                fileName: "src/components/Map.js",
-                                lineNumber: 168,
+                                lineNumber: 310,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -17674,18 +17982,18 @@ const Map = (props)=>{
                                     class: "fa-solid fa-heart"
                                 }, void 0, false, {
                                     fileName: "src/components/Map.js",
-                                    lineNumber: 174,
+                                    lineNumber: 326,
                                     columnNumber: 22
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 171,
+                                lineNumber: 323,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 154,
+                        lineNumber: 309,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -17698,18 +18006,18 @@ const Map = (props)=>{
                             }
                         }, void 0, false, {
                             fileName: "src/components/Map.js",
-                            lineNumber: 179,
+                            lineNumber: 331,
                             columnNumber: 33
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
                             class: "fa-solid fa-moon"
                         }, void 0, false, {
                             fileName: "src/components/Map.js",
-                            lineNumber: 179,
-                            columnNumber: 91
+                            lineNumber: 331,
+                            columnNumber: 94
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 176,
+                        lineNumber: 328,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.TileLayer), {
@@ -17717,7 +18025,7 @@ const Map = (props)=>{
                         attribution: '\xa9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 181,
+                        lineNumber: 333,
                         columnNumber: 17
                     }, undefined),
                     darkMode && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.TileLayer), {
@@ -17725,7 +18033,7 @@ const Map = (props)=>{
                         attribution: '\xa9 <a href="https://carto.com/">CARTO</a> contributors'
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 186,
+                        lineNumber: 338,
                         columnNumber: 30
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeafletClusterDefault.default), {
@@ -17736,7 +18044,7 @@ const Map = (props)=>{
                                 className: 'custom-cluster'
                             });
                         },
-                        children: filteredBikeways.map((b, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Marker), {
+                        children: filteredData.map((b, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.Marker), {
                                 position: [
                                     b.lat,
                                     b.lon
@@ -17776,23 +18084,23 @@ const Map = (props)=>{
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 218,
+                                                        lineNumber: 370,
                                                         columnNumber: 71
                                                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
                                                         class: "fa-regular fa-heart"
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 218,
-                                                        columnNumber: 128
+                                                        lineNumber: 370,
+                                                        columnNumber: 132
                                                     }, undefined)
                                                 }, void 0, false, {
                                                     fileName: "src/components/Map.js",
-                                                    lineNumber: 212,
+                                                    lineNumber: 364,
                                                     columnNumber: 38
                                                 }, undefined)
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 210,
+                                                lineNumber: 362,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -17800,7 +18108,7 @@ const Map = (props)=>{
                                                 content: b.bikeway_name
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 219,
+                                                lineNumber: 371,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -17808,7 +18116,7 @@ const Map = (props)=>{
                                                 content: b.year
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 223,
+                                                lineNumber: 375,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -17816,7 +18124,7 @@ const Map = (props)=>{
                                                 content: b.status
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 227,
+                                                lineNumber: 379,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -17824,7 +18132,7 @@ const Map = (props)=>{
                                                 content: `${b.speedLimit} KM/h`
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 231,
+                                                lineNumber: 383,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17842,7 +18150,7 @@ const Map = (props)=>{
                                                         children: "Comments:"
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 237,
+                                                        lineNumber: 389,
                                                         columnNumber: 41
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -17860,13 +18168,13 @@ const Map = (props)=>{
                                                         children: b.comment_count
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 238,
+                                                        lineNumber: 390,
                                                         columnNumber: 41
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 236,
+                                                lineNumber: 388,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -17874,7 +18182,7 @@ const Map = (props)=>{
                                                 content: b.surface_type
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 244,
+                                                lineNumber: 396,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formJs.Form), {
@@ -17885,34 +18193,34 @@ const Map = (props)=>{
                                                 setCommentCheck: setCommentCheck
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 252,
+                                                lineNumber: 404,
                                                 columnNumber: 37
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 209,
+                                        lineNumber: 361,
                                         columnNumber: 33
                                     }, undefined)
                                 }, void 0, false, {
                                     fileName: "src/components/Map.js",
-                                    lineNumber: 202,
+                                    lineNumber: 354,
                                     columnNumber: 29
                                 }, undefined)
                             }, index, false, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 201,
+                                lineNumber: 353,
                                 columnNumber: 25
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 190,
+                        lineNumber: 342,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Map.js",
-                lineNumber: 153,
+                lineNumber: 308,
                 columnNumber: 13
             }, undefined),
             openComment && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _commentJs.Comment), {
@@ -17924,17 +18232,17 @@ const Map = (props)=>{
                 reduceCommentCount: reduceCommentCount
             }, void 0, false, {
                 fileName: "src/components/Map.js",
-                lineNumber: 267,
+                lineNumber: 419,
                 columnNumber: 29
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/Map.js",
-        lineNumber: 152,
+        lineNumber: 177,
         columnNumber: 9
     }, undefined);
 };
-_s(Map, "sRkweM1AbOYy1sCd8O86ixiNREs=");
+_s(Map, "64DCWq3TLKJuX6UDQUVDcH7Tzpk=");
 _c = Map;
 var _c;
 $RefreshReg$(_c, "Map");
@@ -33465,7 +33773,8 @@ const Form = (props)=>{
                     borderRadius: '10px',
                     alignSelf: 'center',
                     padding: '.5rem',
-                    borderColor: '#4972ecff'
+                    borderColor: 'lightblue',
+                    resize: 'none'
                 },
                 onChange: (e)=>{
                     setComment(e.target.value);
@@ -33615,37 +33924,40 @@ const Comment = (props)=>{
     }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         style: {
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
             borderRadius: '12px',
             zIndex: 1100,
-            backgroundColor: '#ffffff32',
+            backgroundColor: '#97979785',
             fontFamily: 'sans-serif',
-            backdropFilter: 'blur(20px)'
+            backdropFilter: 'blur(20px)',
+            padding: '1rem',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '15px',
+            boxShadow: '0 4px 6px 4px rgba(0,0,0,0.1)',
+            marginTop: '1rem'
         },
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 style: {
                     position: 'absolute',
-                    top: 0,
-                    right: 0,
+                    top: '.5rem',
+                    right: '.5rem',
                     border: 'none',
                     fontSize: '1.1rem',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    background: 'transparent'
                 },
                 onClick: props.onClose,
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
                     class: "fa-solid fa-x"
                 }, void 0, false, {
                     fileName: "src/components/Comment.js",
-                    lineNumber: 107,
+                    lineNumber: 114,
                     columnNumber: 10
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/Comment.js",
-                lineNumber: 103,
+                lineNumber: 110,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -33654,7 +33966,8 @@ const Comment = (props)=>{
                     display: 'flex',
                     flexDirection: 'row',
                     gap: '1rem',
-                    padding: '2rem'
+                    padding: '.5rem',
+                    marginTop: '1rem'
                 },
                 children: comments && comments.map((comment, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                         children: editMode && openIndex == index ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -33663,22 +33976,27 @@ const Comment = (props)=>{
                                 flexDirection: 'column',
                                 gap: '.5rem',
                                 padding: '.7rem',
-                                backgroundColor: '#ffffff5e',
+                                background: 'linear-gradient(45deg,lightgreen, lightblue)',
                                 borderRadius: '10px',
-                                height: '200px',
+                                height: '150px',
                                 width: '150px',
                                 flexShrink: 0,
-                                backdropFilter: 'blur(10px)'
+                                backdropFilter: 'blur(10px)',
+                                boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
                             },
                             children: [
                                 !loading && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("textarea", {
                                     style: {
-                                        minHeight: '150px',
+                                        minHeight: '100px',
                                         width: '133px',
                                         borderRadius: '10px',
                                         padding: '.5rem',
-                                        backgroundColor: '#ffffff51',
-                                        boxShadow: 'inset 0 0 2px 0'
+                                        backgroundColor: '#ffffffff',
+                                        boxShadow: 'inset 0 4px 6px rgba(0,0,0,0.1)',
+                                        border: 'none',
+                                        resize: 'none',
+                                        outline: 'none',
+                                        alignSelf: 'center'
                                     },
                                     defaultValue: comment.content,
                                     onChange: (e)=>setNewComment({
@@ -33687,14 +34005,14 @@ const Comment = (props)=>{
                                         })
                                 }, void 0, false, {
                                     fileName: "src/components/Comment.js",
-                                    lineNumber: 116,
+                                    lineNumber: 123,
                                     columnNumber: 42
                                 }, undefined),
                                 loading && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     children: "Updating..."
                                 }, void 0, false, {
                                     fileName: "src/components/Comment.js",
-                                    lineNumber: 126,
+                                    lineNumber: 133,
                                     columnNumber: 41
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -33712,13 +34030,13 @@ const Comment = (props)=>{
                                     children: "Update"
                                 }, void 0, false, {
                                     fileName: "src/components/Comment.js",
-                                    lineNumber: 127,
+                                    lineNumber: 134,
                                     columnNumber: 29
                                 }, undefined)
                             ]
                         }, comment.id, true, {
                             fileName: "src/components/Comment.js",
-                            lineNumber: 113,
+                            lineNumber: 120,
                             columnNumber: 25
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             style: {
@@ -33726,27 +34044,29 @@ const Comment = (props)=>{
                                 flexDirection: 'column',
                                 gap: '.5rem',
                                 padding: '.7rem',
-                                backgroundColor: '#ffffff5e',
+                                background: 'linear-gradient(45deg,lightgreen, lightblue)',
                                 borderRadius: '10px',
-                                height: '200px',
+                                height: '150px',
                                 width: '150px',
                                 flexShrink: 0,
-                                backdropFilter: 'blur(10px)'
+                                backdropFilter: 'blur(10px)',
+                                boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
                             },
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                     style: {
                                         padding: '.5rem',
-                                        backgroundColor: '#ffffffff',
+                                        backgroundColor: '#ffffffae',
                                         borderRadius: '10px',
-                                        height: '110px',
+                                        height: '50px',
                                         overflowY: 'auto',
-                                        margin: 0
+                                        margin: 0,
+                                        boxShadow: 'inset 0 4px 6px rgba(0,0,0,0.1)'
                                     },
                                     children: comment.content
                                 }, void 0, false, {
                                     fileName: "src/components/Comment.js",
-                                    lineNumber: 138,
+                                    lineNumber: 145,
                                     columnNumber: 29
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -33762,7 +34082,7 @@ const Comment = (props)=>{
                                     })
                                 }, void 0, false, {
                                     fileName: "src/components/Comment.js",
-                                    lineNumber: 140,
+                                    lineNumber: 147,
                                     columnNumber: 29
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -33790,7 +34110,7 @@ const Comment = (props)=>{
                                             children: "Edit"
                                         }, void 0, false, {
                                             fileName: "src/components/Comment.js",
-                                            lineNumber: 149,
+                                            lineNumber: 156,
                                             columnNumber: 33
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -33812,25 +34132,25 @@ const Comment = (props)=>{
                                             children: "Delete"
                                         }, void 0, false, {
                                             fileName: "src/components/Comment.js",
-                                            lineNumber: 156,
+                                            lineNumber: 163,
                                             columnNumber: 33
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/Comment.js",
-                                    lineNumber: 148,
+                                    lineNumber: 155,
                                     columnNumber: 29
                                 }, undefined)
                             ]
                         }, comment.id, true, {
                             fileName: "src/components/Comment.js",
-                            lineNumber: 134,
+                            lineNumber: 141,
                             columnNumber: 25
                         }, undefined)
                     }, void 0, false))
             }, void 0, false, {
                 fileName: "src/components/Comment.js",
-                lineNumber: 108,
+                lineNumber: 115,
                 columnNumber: 9
             }, undefined)
         ]
