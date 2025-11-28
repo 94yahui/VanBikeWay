@@ -33,6 +33,7 @@ export const Comment = props => {
 
     useEffect(() => {
         getAllComments();
+        setEditMode(false);
     }, [props.bikewayId, props.commentCheck])
 
     // update the comment
@@ -98,12 +99,12 @@ export const Comment = props => {
 
 
 
-    return (< div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, borderRadius: '12px', zIndex: 1100, backgroundColor: '#2d9bdb77', fontFamily:'sans-serif'}}>
+    return (< div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, borderRadius: '12px', zIndex: 1100, backgroundColor: '#ffffff32', fontFamily:'sans-serif', backdropFilter:'blur(20px)'}}>
         <button
-            style={{ position: 'absolute', top: 0, right: 0, border:'none', fontSize:'1.2rem'}}
+            style={{ position: 'absolute', top: 0, right: 0, border:'none', fontSize:'1.1rem', cursor:'pointer'}}
             onClick={props.onClose}
 
-        >X</button>
+        ><i class="fa-solid fa-x"></i></button>
         <div style={{ overflowX: 'auto', display: 'flex', flexDirection: 'row', gap: '1rem', padding: '2rem', }}>
             {comments && comments.map((comment, index) => (
                 <>
@@ -135,7 +136,7 @@ export const Comment = props => {
                             style={{display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', backgroundColor: '#ffffff5e', borderRadius: '10px', height: '200px', width: '150px', flexShrink: 0 , backdropFilter:'blur(10px)'}}
                         >
                             <p
-                                style={{ padding: '.5rem', backgroundColor: '#ffffff8f', borderRadius: '10px', height: '110px', overflowY: 'auto', margin: 0}}>{comment.content}</p>
+                                style={{ padding: '.5rem', backgroundColor: '#ffffffff', borderRadius: '10px', height: '110px', overflowY: 'auto', margin: 0}}>{comment.content}</p>
                             <p style={{ fontSize: '.8rem' }}>{new Date(comment.date).toLocaleString('en-US', {
                                 year: 'numeric',
                                 month: 'short',

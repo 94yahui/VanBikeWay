@@ -38,7 +38,13 @@ export const Map = props => {
         borderRadius: '10px',
         fontSize: '1rem',
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
-        borderColor: 'black'
+        borderColor: 'black',
+        width:'30px',
+        height:'30px',
+        display:"flex",
+        justifyContent:'center',
+        alignItems:'center',
+        cursor:'pointer'
     }
 
     const [bikeways, setBikeways] = useState([]);
@@ -146,19 +152,31 @@ export const Map = props => {
         <div style={{ position: 'relative' }}>
             <MapContainer style={mapStyle} zoom={13} center={[49.2827, -123.1207]}>
                 <div style={{ position: 'absolute', top: '2rem', left: '5rem', zIndex: 1200, padding: '.5rem', backgroundColor: '#ffffff93', borderRadius: '50px', display: 'flex', flexDirection: 'row', gap: '1rem', backdropFilter: 'blur(10px)', justifyContent: 'space-around', alignItems: 'center' }}>
-                    <input
-                        style={{ borderRadius: '30px', border: 'none', padding: '1rem' }}
-                        onChange={(e) => setSearchValue(e.target.value)}
-                    ></input>
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            style={{ borderRadius: '30px', border: 'none', padding: '1rem', backgroundColor:'#ffffffff'}}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            value={searchValue}
+                        ></input>
+                        {searchValue && <div
+                            style={{ position: 'absolute', right: '1rem', top: '.9rem', cursor: 'pointer' }}
+                            onClick={() => setSearchValue('')}
+                        >
+                            <i class="fa-solid fa-x"></i>
+                        </div>}
+                    </div>
+                    <div style={{fontSize:'1.1rem', color:'#00000077', cursor:'pointer'}}>
+                        <i class="fa-solid fa-filter"></i>
+                    </div>
                     <span
-                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: 'center', borderRadius: '30px', height: '40px', width: '40px', backgroundColor: '#f6747493', cursor: 'pointer', fontSize:'1.2rem'}}
+                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: 'center', borderRadius: '30px', height: '40px', width: '40px', backgroundColor: '#d0d0d0ab', cursor: 'pointer', fontSize: '1.2rem', color:'red'}}
                         onClick={() => setChooseliked(!chooseLiked)}
-                    >❤️</span>
+                    ><i class="fa-solid fa-heart"></i></span>
                 </div>
                 <button
                     style={buttonStyle}
                     onClick={() => setDarkMode(!darkMode)}>
-                    {darkMode ? 'Light' : 'Dark'}
+                    {darkMode ? <i class="fa-solid fa-sun" style={{color:'white'}}></i> : <i class="fa-solid fa-moon"></i>}
                 </button>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -188,16 +206,16 @@ export const Map = props => {
                                     }
                                 }}
                             >
-                                <div style={{ display: "flex", flexDirection: 'column', gap: '.5rem'}}>
+                                <div style={{ display: "flex", flexDirection: 'column', gap: '.5rem' }}>
                                     <div
-                                    style={{ display: "flex", justifyContent:'center'}}
-                                    ><span
-                                    style={{ fontSize: '1.5rem', textAlign:'center', cursor:'pointer' }}
+                                        style={{ display: "flex", justifyContent: 'center' }}
+                                    ><div
+                                        style={{ fontSize: '1.5rem', textAlign: 'center', cursor: 'pointer' }}
                                         onClick={async () => {
                                             setLiked(!liked);
                                             await changeLikedStatus(b.bikewayId)
                                         }}
-                                    >{checkLikedStatus(b.bikewayId) ? '❤️' : '🩶'}</span></div>
+                                    >{checkLikedStatus(b.bikewayId) ? <i class="fa-solid fa-heart" style={{color:'red'}}></i>: <i class="fa-regular fa-heart"></i>}</div></div>
                                     <InfoRow
                                         title='Name'
                                         content={b.bikeway_name}
