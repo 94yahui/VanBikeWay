@@ -39,19 +39,38 @@ export const Form = props => {
         }
     }
 
+    useEffect(() => {
+        if (!props.openCommentForm) {
+            setErrorMessage('');
+        }
+    }, [props.openCommentForm])
+
 
 
 
     return (
-        <form style={{ marginTop: '1rem', display: "flex", flexDirection: 'column', gap: '.5rem', transition: 'all .35s ease'}}>
-            <h2 style={{ textAlign: 'center' }}>Comment</h2>
-            {loading ? <p>Uploading your comment...</p> : <textarea
-                style={{ minHeight: '100px', width:'90%',borderRadius:'10px',alignSelf:'center', padding:'.5rem', borderColor:'lightblue',resize:'none'}}
-                onChange={e => {setComment(e.target.value);setErrorMessage('')}}
-            ></textarea>}
-            {errorMessage && <p style={{ color: `${errorMessage.includes('success') ? '#34e57bff' : 'red'}`, fontWeight:'semi-bold', textAlign:'center'}}>{errorMessage}</p>}
+        <form style={{
+            marginTop: '1rem', minWidth:'300px', minHeight:'300px', display: "flex", flexDirection: 'column', gap: '1rem', transition: 'all .35s ease', backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '15px',
+            boxShadow: '0 4px 6px 4px rgba(0,0,0,0.1)',
+            marginTop: '1rem',
+            padding: '1rem',
+            fontFamily: 'sans-serif'
+        }}>
             <button
-                style={{ backgroundColor: '#4972ecff', borderRadius: '10px', color: 'white', padding:'.3rem', border:'none'}}
+                style={{ position: 'absolute', top: '.5rem', right: '.5rem', border: 'none', fontSize: '1.1rem', cursor: 'pointer', background: 'transparent' }}
+                onClick={props.onClose}
+
+            ><i class="fa-solid fa-x"></i></button>
+            <h2 style={{ textAlign: 'center' }}>Comment</h2>
+            {loading ? <p style={{ textAlign: 'center' }}>Uploading your comment...</p> : <textarea
+                style={{ minHeight: '100px', width: '90%', maxWidth: '400px', borderRadius: '10px', alignSelf: 'center', padding: '.5rem', borderColor: '#4972ecff', resize: 'none' }}
+                onChange={e => { setComment(e.target.value); setErrorMessage('') }}
+            ></textarea>}
+            {errorMessage && <p style={{ color: `${errorMessage.includes('success') ? '#34e57bff' : 'red'}`, fontWeight: 'semi-bold', textAlign: 'center' }}>{errorMessage}</p>}
+            <button
+                style={{ backgroundColor: '#4972ecff', borderRadius: '5px', color: 'white', padding: '1rem', border: 'none', minWidth: '200px', fontSize: '1.1rem', margin: 'auto',cursor:'pointer' }}
                 onClick={postComment}
             >Submit</button>
         </form>

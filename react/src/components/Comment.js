@@ -99,29 +99,31 @@ export const Comment = props => {
 
 
 
-    return (< div style={{
-        borderRadius: '12px', zIndex: 1100, backgroundColor: '#97979785', fontFamily: 'sans-serif', backdropFilter: 'blur(20px)', padding: '1rem',
+    return (< div style={{position:'fixed', right:0,top:0,
+        borderRadius: '12px',backgroundColor: '#97979785', fontFamily: 'sans-serif', backdropFilter: 'blur(20px)', padding: '1rem',
         backgroundColor: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(10px)',
         borderRadius: '15px',
         boxShadow: '0 4px 6px 4px rgba(0,0,0,0.1)',
-        marginTop: '1rem'
+        marginTop: '1rem',
+        height:'100vh',
+        zIndex:1205
     }}>
         <button
-            style={{ position: 'absolute', top: '.5rem', right: '.5rem', border: 'none', fontSize: '1.1rem', cursor: 'pointer', background: 'transparent' }}
+            style={{ position: 'fixed', top: '.5rem', right: '.5rem', border: 'none', fontSize: '1.1rem', cursor: 'pointer', background: 'transparent' }}
             onClick={props.onClose}
 
         ><i class="fa-solid fa-x"></i></button>
-        <div style={{ overflowX: 'auto', display: 'flex', flexDirection: 'row', gap: '1rem', padding: '.5rem', marginTop:'1rem'}}>
+        <div style={{ overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', padding: '.5rem', marginTop: '1rem',height:'100%'}}>
             {comments && comments.map((comment, index) => (
                 <>
 
                     {editMode && openIndex == index ?
                         <form
                             key={comment.id}
-                            style={{ display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', background:'linear-gradient(45deg,lightgreen, lightblue)', borderRadius: '10px', height: '150px', width: '150px', flexShrink: 0, backdropFilter: 'blur(10px)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)'}}>
+                            style={{ display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', background: 'linear-gradient(45deg,lightgreen, lightblue)', borderRadius: '10px', height: '150px', width: '150px', flexShrink: 0, backdropFilter: 'blur(10px)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
                             {!loading && <textarea
-                                style={{ minHeight: '100px', width: '133px', borderRadius: '10px', padding: '.5rem', backgroundColor: '#ffffffff', boxShadow: 'inset 0 4px 6px rgba(0,0,0,0.1)', border:'none',resize:'none', outline:'none', alignSelf:'center'}}
+                                style={{ minHeight: '100px', width: '133px', borderRadius: '10px', padding: '.5rem', backgroundColor: '#ffffffff', boxShadow: 'inset 0 4px 6px rgba(0,0,0,0.1)', border: 'none', resize: 'none', outline: 'none', alignSelf: 'center' }}
                                 defaultValue={comment.content}
                                 onChange={(e) => setNewComment({
                                     commentId: comment.id,
@@ -131,20 +133,30 @@ export const Comment = props => {
 
                             </textarea>}
                             {loading && <p>Updating...</p>}
-                            <button onClick={(e) => {
-                                e.preventDefault();
-                                updateComment();
-                            }}
-                                style={{ borderRadius: '10px', backgroundColor: '#4972ecff', border: 'none', padding: '.3rem', color: 'white' }}
-                            >Update</button>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '.5rem' }}>
+                                <button onClick={(e) => {
+                                    e.preventDefault();
+                                    updateComment();
+                                }}
+                                    style={{flex:1,flexBasis:'50%', borderRadius: '10px', backgroundColor: '#4972ecff', border: 'none', padding: '.3rem', color: 'white' }}
+                                >Update</button>
+                                <button
+                                    style={{ flex:1,flexBasis:'50%',borderRadius: '10px', backgroundColor: '#de4343ff', border: 'none', padding: '.3rem', color: 'white', borderRadius: '10px', border: 'none', padding: '.3rem' }}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        deleteComment(comment.id);
+                                        setEditMode(false);
+                                    }}
+                                >Delete</button>
+                            </div>
                         </form> :
                         <div
                             key={comment.id}
-                            style={{ display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', background:'linear-gradient(45deg,lightgreen, lightblue)', borderRadius: '10px', height: '150px', width: '150px', flexShrink: 0, backdropFilter: 'blur(10px)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', }}
+                            style={{ display: "flex", flexDirection: 'column', gap: '.5rem', padding: '.7rem', background: 'linear-gradient(45deg,lightgreen, lightblue)', borderRadius: '10px', height: '150px', width: '150px', flexShrink: 0, backdropFilter: 'blur(10px)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', }}
                         >
                             <p
-                                style={{ padding: '.5rem', backgroundColor:'#ffffffae', borderRadius: '10px', height: '50px', overflowY: 'auto', margin: 0, boxShadow: 'inset 0 4px 6px rgba(0,0,0,0.1)',}}>{comment.content}</p>
-                            <p style={{ fontSize: '.8rem'}}>{new Date(comment.date).toLocaleString('en-US', {
+                                style={{ padding: '.5rem', backgroundColor: '#ffffffae', borderRadius: '10px', height: '50px', overflowY: 'auto', margin: 0, boxShadow: 'inset 0 4px 6px rgba(0,0,0,0.1)', }}>{comment.content}</p>
+                            <p style={{ fontSize: '.8rem' }}>{new Date(comment.date).toLocaleString('en-US', {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric',
@@ -152,22 +164,13 @@ export const Comment = props => {
                                 minute: '2-digit'
                             })}
                             </p>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: '.5rem' }}>
-                                <button
-                                    style={{ width: '100%', borderRadius: '10px', backgroundColor: '#4972ecff', border: 'none', padding: '.3rem', color: 'white' }}
-                                    onClick={() => {
-                                        setEditMode(true);
-                                        setOpenIndex(index);
-                                    }}
-                                >Edit</button>
-                                <button
-                                    style={{ width: '100%', borderRadius: '10px', backgroundColor: '#de4343ff', border: 'none', padding: '.3rem', color: 'white', borderRadius: '10px', border: 'none', padding: '.3rem' }}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        deleteComment(comment.id);
-                                    }}
-                                >Delete</button>
-                            </div>
+                            <button
+                                style={{ width: '100%', borderRadius: '10px', backgroundColor: '#4972ecff', border: 'none', padding: '.3rem', color: 'white' }}
+                                onClick={() => {
+                                    setEditMode(true);
+                                    setOpenIndex(index);
+                                }}
+                            >Edit</button>
                         </div>
                     }
                 </>

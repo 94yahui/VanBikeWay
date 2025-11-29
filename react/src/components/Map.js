@@ -10,9 +10,10 @@ import { Comment } from "./Comment.js";
 export const Map = props => {
 
     const mapStyle = {
-        height: "500px",
-        borderRadius: "20px",
-        position: 'relative'
+        height: "600px",
+        borderRadius: "15px",
+        position: 'relative',
+        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
     }
 
     const markerClusterStyle = `
@@ -51,6 +52,7 @@ export const Map = props => {
     const [bikewayId, setBikewayId] = useState('');
     // const [isOpen, setIsOpen] = useState(false);
     const [openComment, setOpenComment] = useState(false);
+    const [openCommentForm, setOpenCommentForm] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
     const [commentCheck, setCommentCheck] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -59,12 +61,12 @@ export const Map = props => {
     const [chooseLiked, setChooseliked] = useState(false);
     const [status, setStatus] = useState('');
     const [speedLimit, setSpeedLimit] = useState({
-        minSpeed: 0,
-        maxSpeed: 0
+        minSpeed: '',
+        maxSpeed: ''
     });
     const [year, setYear] = useState({
-        minYear: 0,
-        maxYear: 9999
+        minYear: '',
+        maxYear: ''
     });
 
 
@@ -176,26 +178,26 @@ export const Map = props => {
     return (
         <div style={{ position: 'relative' }}>
             <div style={{
-                textAlign:'center',
+                textAlign: 'center',
                 padding: '1.5rem',
-                background:'linear-gradient(45deg,lightgreen, lightblue)',
+                background: 'linear-gradient(45deg,lightgreen, lightblue)',
                 backdropFilter: 'blur(10px)',
                 borderRadius: '15px',
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                marginBottom:'1rem',
-                fontFamily:'sans-serif'
+                marginBottom: '1rem',
+                fontFamily: 'sans-serif'
             }}><h1>Vancouver Bikeways</h1></div>
             <div style={{
                 display: 'flex',
-                flexWrap:'wrap',
+                flexWrap: 'wrap',
                 gap: '1rem',
-                padding: '1.5rem',
+                padding: '1rem',
                 backgroundColor: 'rgba(255, 255, 255, 0.95)',
                 backdropFilter: 'blur(10px)',
                 borderRadius: '15px',
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                marginBottom:'1rem',
-                fontFamily:'sans-serif'
+                marginBottom: '1rem',
+                fontFamily: 'sans-serif'
             }}>
                 {/* Status Card */}
                 <div style={{
@@ -203,7 +205,8 @@ export const Map = props => {
                     padding: '1rem',
                     backgroundColor: '#fff',
                     borderRadius: '10px',
-                    border: '1px solid #e0e0e0'
+                    border: '1px solid #e0e0e0',
+                    minWidth: '150px'
                 }}>
                     <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
                         <i class="fa-solid fa-location-crosshairs"></i> Status
@@ -217,6 +220,7 @@ export const Map = props => {
                             border: '1px solid #ccc',
                             fontSize: '0.95rem'
                         }}
+                        value={status}
                     >
                         <option value="">All Status</option>
                         {bikewayStatus.map((s, index) =>
@@ -248,6 +252,7 @@ export const Map = props => {
                                 border: '1px solid #ccc',
                                 fontSize: '0.95rem'
                             }}
+                            value={speedLimit.minSpeed}
                         />
                         <span style={{ color: '#999' }}>~</span>
                         <input
@@ -261,6 +266,7 @@ export const Map = props => {
                                 border: '1px solid #ccc',
                                 fontSize: '0.95rem'
                             }}
+                            value={speedLimit.maxSpeed}
                         />
                     </div>
                 </div>
@@ -288,6 +294,7 @@ export const Map = props => {
                                 border: '1px solid #ccc',
                                 fontSize: '0.95rem'
                             }}
+                            value={year.minYear}
                         />
                         <span style={{ color: '#999' }}>~</span>
                         <input
@@ -301,9 +308,35 @@ export const Map = props => {
                                 border: '1px solid #ccc',
                                 fontSize: '0.95rem'
                             }}
+                            value={year.maxYear}
                         />
                     </div>
                 </div>
+                <div style={{
+                    // flex: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    padding: '1rem',
+                    backgroundColor: '#e0e0e0ff',
+                    borderRadius: '10px',
+                    border: '1px solid #e0e0e0'
+                }}
+                    onClick={() => {
+                        setStatus('');
+                        setSpeedLimit({
+                            minSpeed: '',
+                            maxSpeed: ''
+                        }
+                        );
+                        setYear({
+                            minYear: '',
+                            maxYear: ''
+                        });
+                        setChooseliked(false);
+                    }}
+                >Reset</div>
             </div>
             <MapContainer style={mapStyle} zoom={13} center={[49.2827, -123.1207]}>
                 <div style={{ position: 'absolute', top: '1rem', left: '5rem', zIndex: 1200, padding: '.5rem', backgroundColor: '#ffffff93', borderRadius: '50px', display: 'flex', flexDirection: 'row', gap: '1rem', backdropFilter: 'blur(10px)', justifyContent: 'space-around', alignItems: 'center' }}>
@@ -388,7 +421,7 @@ export const Map = props => {
                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'center', gap: '1rem' }}>
                                         <p style={{ margin: 0 }}>Comments:</p>
                                         <p
-                                            style={{ fontWeight: "bold", margin: 0, cursor: 'pointer', textDecoration: 'underline', color: 'orange' }}
+                                            style={{ fontWeight: "bold", margin: 0, cursor: 'pointer', textDecoration: 'underline', color: '#4972ecff' }}
                                             onClick={() => { setBikewayId(b.bikewayId); setCommentCheck(!commentCheck), setOpenComment(true); }}
 
                                         >{b.comment_count}</p>
@@ -397,17 +430,10 @@ export const Map = props => {
                                         title='Surface Type'
                                         content={b.surface_type}
                                     />
-                                    {/* <button
-                                        style={{ backgroundColor: 'orange', borderRadius: '10px', color: 'white' }}
-                                        onClick={() => { setIsOpen(!isOpen); setBikewayId(b.bikewayId); }}
-                                    >Write comment</button> */}
-                                    <Form
-                                        bikewayId={bikewayId}
-                                        // isOpen={isOpen}
-                                        onCommentSubmit={() => updateBikewayCommentCount(b.bikewayId)}
-                                        commentCheck={commentCheck}
-                                        setCommentCheck={setCommentCheck}
-                                    />
+                                    <button
+                                        style={{ backgroundColor: '#4972ecff', borderRadius: '10px', color: 'white', border: 'none', padding: '.5rem', cursor: 'pointer' }}
+                                        onClick={() => setOpenCommentForm(true)}
+                                    >Write comment</button>
                                 </div>
                             </Popup>
 
@@ -415,12 +441,35 @@ export const Map = props => {
                     ))}
                 </MarkerClusterGroup>
             </MapContainer>
+            {openCommentForm &&
+                <div
+                    style={{ position: 'absolute', inset: 0, backdropFilter: 'blur(10px)', zIndex: 1200, backgroundColor: '#8888885d' }}
+                >
+
+                </div>}
+
+            {openCommentForm &&
+                <div style={{
+                    position: 'fixed', inset: 0, display:'flex', alignItems: 'center',
+                    justifyContent: 'center', zIndex: 1300
+                }}><Form
+                        bikewayId={bikewayId}
+                        // isOpen={isOpen}
+                        onCommentSubmit={() => updateBikewayCommentCount(bikewayId)}
+                        commentCheck={commentCheck}
+                        setCommentCheck={setCommentCheck}
+                        onClose={() => setOpenCommentForm(false)}
+                        openCommentForm={openCommentForm}
+                    />
+                </div>
+            }
 
             {openComment && <Comment
                 bikewayId={bikewayId}
                 commentCheck={commentCheck}
                 onClose={() => { setOpenComment(false) }}
                 reduceCommentCount={reduceCommentCount}
+                openComment={openComment}
             />}
         </div>
     )
