@@ -199,7 +199,6 @@ export const Map = props => {
                 marginBottom: '1rem',
                 fontFamily: 'sans-serif'
             }}>
-                {/* Status Card */}
                 <div style={{
                     flex: 1,
                     padding: '1rem',
@@ -229,7 +228,6 @@ export const Map = props => {
                     </select>
                 </div>
 
-                {/* Speed Limit Card */}
                 <div style={{
                     flex: 1,
                     padding: '1rem',
@@ -270,8 +268,7 @@ export const Map = props => {
                         />
                     </div>
                 </div>
-
-                {/* Year Card */}
+                
                 <div style={{
                     flex: 1,
                     padding: '1rem',
