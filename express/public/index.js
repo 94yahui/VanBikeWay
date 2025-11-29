@@ -17730,7 +17730,8 @@ const Map = (props)=>{
                                 style: {
                                     display: 'flex',
                                     gap: '0.5rem',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    flexWrap: 'wrap'
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -17753,16 +17754,6 @@ const Map = (props)=>{
                                         lineNumber: 242,
                                         columnNumber: 25
                                     }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        style: {
-                                            color: '#999'
-                                        },
-                                        children: "~"
-                                    }, void 0, false, {
-                                        fileName: "src/components/Map.js",
-                                        lineNumber: 255,
-                                        columnNumber: 25
-                                    }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                         type: "number",
                                         placeholder: "Max",
@@ -17780,7 +17771,7 @@ const Map = (props)=>{
                                         value: speedLimit.maxSpeed
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 256,
+                                        lineNumber: 255,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
@@ -17816,21 +17807,22 @@ const Map = (props)=>{
                                         class: "fa-regular fa-calendar"
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 280,
+                                        lineNumber: 279,
                                         columnNumber: 25
                                     }, undefined),
                                     " Year"
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 279,
+                                lineNumber: 278,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 style: {
                                     display: 'flex',
                                     gap: '0.5rem',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    flexWrap: 'wrap'
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -17850,17 +17842,7 @@ const Map = (props)=>{
                                         value: year.minYear
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 283,
-                                        columnNumber: 25
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                        style: {
-                                            color: '#999'
-                                        },
-                                        children: "~"
-                                    }, void 0, false, {
-                                        fileName: "src/components/Map.js",
-                                        lineNumber: 296,
+                                        lineNumber: 282,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -17880,19 +17862,19 @@ const Map = (props)=>{
                                         value: year.maxYear
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 297,
+                                        lineNumber: 295,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 282,
+                                lineNumber: 281,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 272,
+                        lineNumber: 271,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17922,7 +17904,7 @@ const Map = (props)=>{
                         children: "Reset"
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 312,
+                        lineNumber: 310,
                         columnNumber: 17
                     }, undefined)
                 ]
@@ -17972,7 +17954,7 @@ const Map = (props)=>{
                                         value: searchValue
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 341,
+                                        lineNumber: 339,
                                         columnNumber: 25
                                     }, undefined),
                                     searchValue && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -17987,18 +17969,18 @@ const Map = (props)=>{
                                             class: "fa-solid fa-x"
                                         }, void 0, false, {
                                             fileName: "src/components/Map.js",
-                                            lineNumber: 350,
+                                            lineNumber: 348,
                                             columnNumber: 29
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 346,
+                                        lineNumber: 344,
                                         columnNumber: 41
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 340,
+                                lineNumber: 338,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -18020,18 +18002,18 @@ const Map = (props)=>{
                                     class: "fa-solid fa-heart"
                                 }, void 0, false, {
                                     fileName: "src/components/Map.js",
-                                    lineNumber: 356,
+                                    lineNumber: 354,
                                     columnNumber: 22
                                 }, undefined)
                             }, void 0, false, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 353,
+                                lineNumber: 351,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 339,
+                        lineNumber: 337,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18044,18 +18026,18 @@ const Map = (props)=>{
                             }
                         }, void 0, false, {
                             fileName: "src/components/Map.js",
-                            lineNumber: 361,
+                            lineNumber: 359,
                             columnNumber: 33
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
                             class: "fa-solid fa-moon"
                         }, void 0, false, {
                             fileName: "src/components/Map.js",
-                            lineNumber: 361,
+                            lineNumber: 359,
                             columnNumber: 94
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 358,
+                        lineNumber: 356,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.TileLayer), {
@@ -18063,7 +18045,7 @@ const Map = (props)=>{
                         attribution: '\xa9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 363,
+                        lineNumber: 361,
                         columnNumber: 17
                     }, undefined),
                     darkMode && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeaflet.TileLayer), {
@@ -18071,7 +18053,7 @@ const Map = (props)=>{
                         attribution: '\xa9 <a href="https://carto.com/">CARTO</a> contributors'
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 368,
+                        lineNumber: 366,
                         columnNumber: 30
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLeafletClusterDefault.default), {
@@ -18122,23 +18104,23 @@ const Map = (props)=>{
                                                         }
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 400,
+                                                        lineNumber: 398,
                                                         columnNumber: 71
                                                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("i", {
                                                         class: "fa-regular fa-heart"
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 400,
+                                                        lineNumber: 398,
                                                         columnNumber: 132
                                                     }, undefined)
                                                 }, void 0, false, {
                                                     fileName: "src/components/Map.js",
-                                                    lineNumber: 394,
+                                                    lineNumber: 392,
                                                     columnNumber: 38
                                                 }, undefined)
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 392,
+                                                lineNumber: 390,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -18146,7 +18128,7 @@ const Map = (props)=>{
                                                 content: b.bikeway_name
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 401,
+                                                lineNumber: 399,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -18154,7 +18136,7 @@ const Map = (props)=>{
                                                 content: b.year
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 405,
+                                                lineNumber: 403,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -18162,7 +18144,7 @@ const Map = (props)=>{
                                                 content: b.status
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 409,
+                                                lineNumber: 407,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -18170,7 +18152,7 @@ const Map = (props)=>{
                                                 content: `${b.speedLimit} KM/h`
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 413,
+                                                lineNumber: 411,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18188,7 +18170,7 @@ const Map = (props)=>{
                                                         children: "Comments:"
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 419,
+                                                        lineNumber: 417,
                                                         columnNumber: 41
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -18206,13 +18188,13 @@ const Map = (props)=>{
                                                         children: b.comment_count
                                                     }, void 0, false, {
                                                         fileName: "src/components/Map.js",
-                                                        lineNumber: 420,
+                                                        lineNumber: 418,
                                                         columnNumber: 41
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 418,
+                                                lineNumber: 416,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoRowJs.InfoRow), {
@@ -18220,7 +18202,7 @@ const Map = (props)=>{
                                                 content: b.surface_type
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 426,
+                                                lineNumber: 424,
                                                 columnNumber: 37
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18236,34 +18218,34 @@ const Map = (props)=>{
                                                 children: "Write comment"
                                             }, void 0, false, {
                                                 fileName: "src/components/Map.js",
-                                                lineNumber: 430,
+                                                lineNumber: 428,
                                                 columnNumber: 37
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/Map.js",
-                                        lineNumber: 391,
+                                        lineNumber: 389,
                                         columnNumber: 33
                                     }, undefined)
                                 }, void 0, false, {
                                     fileName: "src/components/Map.js",
-                                    lineNumber: 384,
+                                    lineNumber: 382,
                                     columnNumber: 29
                                 }, undefined)
                             }, index, false, {
                                 fileName: "src/components/Map.js",
-                                lineNumber: 383,
+                                lineNumber: 381,
                                 columnNumber: 25
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/Map.js",
-                        lineNumber: 372,
+                        lineNumber: 370,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Map.js",
-                lineNumber: 338,
+                lineNumber: 336,
                 columnNumber: 13
             }, undefined),
             openCommentForm && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18276,7 +18258,7 @@ const Map = (props)=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/Map.js",
-                lineNumber: 442,
+                lineNumber: 440,
                 columnNumber: 17
             }, undefined),
             openCommentForm && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18298,12 +18280,12 @@ const Map = (props)=>{
                     openCommentForm: openCommentForm
                 }, void 0, false, {
                     fileName: "src/components/Map.js",
-                    lineNumber: 452,
+                    lineNumber: 450,
                     columnNumber: 20
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/Map.js",
-                lineNumber: 449,
+                lineNumber: 447,
                 columnNumber: 17
             }, undefined),
             openComment && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _commentJs.Comment), {
@@ -18316,7 +18298,7 @@ const Map = (props)=>{
                 openComment: openComment
             }, void 0, false, {
                 fileName: "src/components/Map.js",
-                lineNumber: 464,
+                lineNumber: 462,
                 columnNumber: 29
             }, undefined)
         ]

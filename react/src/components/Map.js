@@ -238,7 +238,7 @@ export const Map = props => {
                     <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
                         <i class="fa-solid fa-bicycle"></i> Speed Limit (km/h)
                     </label>
-                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap:'wrap'}}>
                         <input
                             type="number"
                             placeholder="Min"
@@ -252,7 +252,6 @@ export const Map = props => {
                             }}
                             value={speedLimit.minSpeed}
                         />
-                        <span style={{ color: '#999' }}>~</span>
                         <input
                             type="number"
                             placeholder="Max"
@@ -279,7 +278,7 @@ export const Map = props => {
                     <label style={{ display: 'block', fontWeight: '600', marginBottom: '0.5rem', color: '#333' }}>
                         <i class="fa-regular fa-calendar"></i> Year
                     </label>
-                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center',flexWrap:'wrap' }}>
                         <input
                             type="number"
                             placeholder="From"
@@ -293,7 +292,6 @@ export const Map = props => {
                             }}
                             value={year.minYear}
                         />
-                        <span style={{ color: '#999' }}>~</span>
                         <input
                             type="number"
                             placeholder="To"
@@ -318,7 +316,7 @@ export const Map = props => {
                     padding: '1rem',
                     backgroundColor: '#e0e0e0ff',
                     borderRadius: '10px',
-                    border: '1px solid #e0e0e0'
+                    border: '1px solid #e0e0e0',
                 }}
                     onClick={() => {
                         setStatus('');
